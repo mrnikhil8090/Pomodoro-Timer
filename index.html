@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pomodoro Timer</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="app-title">🍅 Pomodoro</h1>
+    <p class="tagline">Stay focused. Take breaks. Ship things.</p>
+
+    <!-- mode tabs -->
+    <div class="mode-tabs">
+      <button class="tab active" data-mode="focus" onclick="switchMode('focus')">Focus</button>
+      <button class="tab" data-mode="short" onclick="switchMode('short')">Short Break</button>
+      <button class="tab" data-mode="long" onclick="switchMode('long')">Long Break</button>
+    </div>
+
+    <!-- timer display -->
+    <div class="timer-card" id="timer-card">
+      <svg class="progress-ring" viewBox="0 0 200 200">
+        <circle class="ring-bg" cx="100" cy="100" r="88"/>
+        <circle class="ring-fill" id="ring" cx="100" cy="100" r="88"
+          stroke-dasharray="553"
+          stroke-dashoffset="0"/>
+      </svg>
+      <div class="time-display" id="time-display">25:00</div>
+    </div>
+
+    <!-- controls -->
+    <div class="controls">
+      <button class="btn-icon" title="Reset" onclick="resetTimer()">⟳</button>
+      <button class="btn-main" id="start-btn" onclick="toggleTimer()">Start</button>
+      <button class="btn-icon" title="Skip" onclick="skipSession()">⏭</button>
+    </div>
+
+    <!-- session info -->
+    <div class="session-info">
+      <div class="stat">
+        <span class="stat-val" id="session-count">0</span>
+        <span class="stat-label">Sessions</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val" id="current-label">Focus Time</span>
+        <span class="stat-label">Current Mode</span>
+      </div>
+    </div>
+
+    <!-- settings -->
+    <details class="settings">
+      <summary>⚙ Customize Durations</summary>
+      <div class="settings-grid">
+        <div class="setting-item">
+          <label for="focus-dur">Focus (min)</label>
+          <input type="number" id="focus-dur" value="25" min="1" max="90" onchange="updateDurations()"/>
+        </div>
+        <div class="setting-item">
+          <label for="short-dur">Short Break (min)</label>
+          <input type="number" id="short-dur" value="5" min="1" max="30" onchange="updateDurations()"/>
+        </div>
+        <div class="setting-item">
+          <label for="long-dur">Long Break (min)</label>
+          <input type="number" id="long-dur" value="15" min="1" max="60" onchange="updateDurations()"/>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <script src="timer.js"></script>
+</body>
+</html>

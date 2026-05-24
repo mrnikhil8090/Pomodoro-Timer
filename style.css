@@ -1,0 +1,266 @@
+/* ===========================
+   Base
+=========================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --focus-color: #e84855;
+  --short-color: #3bba9c;
+  --long-color: #5b8dee;
+  --bg: #1c1c2e;
+  --card-bg: #16213e;
+  --text: #eaeaea;
+  --muted: #7b7f9e;
+  --ring-circumference: 553;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+/* ===========================
+   Container
+=========================== */
+.container {
+  max-width: 420px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.app-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.tagline {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-top: -1rem;
+}
+
+/* ===========================
+   Mode Tabs
+=========================== */
+.mode-tabs {
+  display: flex;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 5px;
+  gap: 4px;
+}
+
+.tab {
+  padding: 0.5rem 1.1rem;
+  border: none;
+  border-radius: 9px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  color: var(--muted);
+  transition: background 0.2s, color 0.2s;
+}
+
+.tab.active {
+  background: var(--active-color, var(--focus-color));
+  color: #fff;
+}
+
+/* ===========================
+   Timer Card
+=========================== */
+.timer-card {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-ring {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-bg {
+  fill: none;
+  stroke: var(--card-bg);
+  stroke-width: 10;
+}
+
+.ring-fill {
+  fill: none;
+  stroke: var(--active-color, var(--focus-color));
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear, stroke 0.3s;
+}
+
+.time-display {
+  font-size: 3.2rem;
+  font-weight: 700;
+  letter-spacing: -2px;
+  z-index: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===========================
+   Controls
+=========================== */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.btn-main {
+  padding: 0.75rem 2.8rem;
+  background: var(--active-color, var(--focus-color));
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  min-width: 130px;
+}
+
+.btn-main:hover { opacity: 0.88; }
+.btn-main:active { transform: scale(0.97); }
+
+.btn-icon {
+  background: var(--card-bg);
+  border: none;
+  color: var(--muted);
+  font-size: 1.3rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-icon:hover {
+  background: #1e2a45;
+  color: var(--text);
+}
+
+/* ===========================
+   Session Info
+=========================== */
+.session-info {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-val {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+/* ===========================
+   Settings
+=========================== */
+.settings {
+  width: 100%;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+}
+
+.settings summary {
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--muted);
+  user-select: none;
+  list-style: none;
+}
+
+.settings summary::-webkit-details-marker { display: none; }
+
+.settings-grid {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.setting-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 90px;
+}
+
+.setting-item label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.setting-item input {
+  padding: 0.45rem 0.7rem;
+  background: var(--bg);
+  border: 1.5px solid #2c2f4a;
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.setting-item input:focus {
+  border-color: var(--active-color, var(--focus-color));
+}
+
+/* ===========================
+   Pulse animation when running
+=========================== */
+.timer-card.running .time-display {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.75; }
+}
